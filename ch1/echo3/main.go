@@ -12,9 +12,13 @@ import (
 	"strings"
 )
 
+func PrintArgs(args []string) {
+	fmt.Println(strings.Join(args, " "))
+}
+
 //!+
 func main() {
-	fmt.Println(strings.Join(os.Args[1:], " "))
+	PrintArgs(os.Args[1:])
 }
 
 //!-

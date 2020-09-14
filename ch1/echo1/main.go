@@ -12,13 +12,17 @@ import (
 	"os"
 )
 
-func main() {
+func PrintArgs(args []string) {
 	var s, sep string
-	for i := 1; i < len(os.Args); i++ {
-		s += sep + os.Args[i]
+	for i := 1; i < len(args); i++ {
+		s += sep + args[i]
 		sep = " "
 	}
 	fmt.Println(s)
+}
+
+func main() {
+	PrintArgs(os.Args)
 }
 
 //!-
