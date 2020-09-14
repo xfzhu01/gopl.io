@@ -19,13 +19,22 @@ import (
 func main() {
 	start := time.Now()
 	ch := make(chan string)
+	times := 2
 	for _, url := range os.Args[1:] {
-		go fetch(url, ch) // start a goroutine
+		go multiTimesFetch(url, ch, times) // start a
 	}
 	for range os.Args[1:] {
-		fmt.Println(<-ch) // receive from channel ch
+		for i := 0; i < times; i++ {
+			fmt.Println(<-ch) // receive from channel ch
+		}
 	}
 	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
+}
+
+func multiTimesFetch(url string, ch chan<- string, times int) {
+	for i := 0; i < times; i++ {
+		fetch(url, ch)
+	}
 }
 
 func fetch(url string, ch chan<- string) {
