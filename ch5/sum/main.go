@@ -6,7 +6,11 @@
 // The sum program demonstrates a variadic function.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
 
 //!+
 func sum(vals ...int) int {
@@ -17,7 +21,20 @@ func sum(vals ...int) int {
 	return total
 }
 
+func Join(sep string, args ...string) string {
+	return strings.Join(args, sep)
+}
+
 //!-
+
+func max(vals ...int) int {
+	length := len(vals)
+	if length == 0 {
+		return 0
+	}
+	sort.Ints(vals)
+	return vals[length-1]
+}
 
 func main() {
 	//!+main
@@ -30,4 +47,8 @@ func main() {
 	values := []int{1, 2, 3, 4}
 	fmt.Println(sum(values...)) // "10"
 	//!-slice
+
+	//!+max
+	fmt.Println(max())
+	fmt.Println(max(7, 2, 3, 4))
 }
